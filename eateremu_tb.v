@@ -15,9 +15,8 @@ module eateremu_tb;
 
     reg clk;
     initial begin
-        clk = 1;
-        forever 
-            #1 clk = !clk;
+        clk = 0;
+        forever #1 clk = !clk;
     end
 
     cpu eateremu (
@@ -36,7 +35,7 @@ module eateremu_tb;
         .zf(zf)
     );
 
-    initial begin $monitor("%d: pc=%1x bus=%2x ctrl=%16b", $time, pc_data, bus, ctrl_state);
+    initial begin $monitor("%d: pc=%1x bus=%2x ctrl=%16b mem_addr=%1x", $time, pc_data, bus, ctrl_state, mem_address_data);
         #32 $finish;
     end
 endmodule

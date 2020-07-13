@@ -21,13 +21,11 @@ module cpu (
     output [15:0] ctrl_state,
     output ovf, zf /* flags */
 );
-    wire cpu_clk;
-
     /* control signals */
     wire hlt, mi, ri, ro, io, ii, ai, ao, so, su, bi, oi, ce, co, j, fi;
-
-    assign cpu_clk = (clk & ~hlt);
     assign ctrl_state = { hlt, mi, ri, ro, io, ii, ai, ao, so, su, bi, oi, ce, co, j, fi };
+
+    wire cpu_clk = (clk & !hlt);
 
     /* A register */
     register8 A (

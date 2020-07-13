@@ -23,6 +23,7 @@ module control (
     reg[2:0] count;
     
     initial count <= 3'b111; /* pre-incremented in loop, initialized with overflow to 0 */
+    initial ctrl_data <= 16'b0000000000000000;
 
     always @(posedge clk) begin
         count++;
