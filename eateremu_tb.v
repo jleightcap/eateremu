@@ -10,11 +10,12 @@ module eateremu_tb;
     wire[7:0] instruction_data;
     wire[7:0] display_data;
     wire[3:0] pc_data;
+    wire[15:0] ctrl_state;
     wire ovf, zf; /* flags */
 
     reg clk;
     initial begin
-        clk = 0;
+        clk = 1;
         forever 
             #1 clk = !clk;
     end
@@ -30,11 +31,12 @@ module eateremu_tb;
         .instruction_data(instruction_data),
         .display_data(display_data),
         .pc_data(pc_data),
+        .ctrl_state(ctrl_state),
         .ovf(ovf),
         .zf(zf)
     );
 
-    initial begin $monitor("%d: bus=%08x", $time, bus);
-        #100000 $finish;
+    initial begin $monitor("%d: pc=%1x bus=%2x ctrl=%16b", $time, pc_data, bus, ctrl_state);
+        #32 $finish;
     end
 endmodule

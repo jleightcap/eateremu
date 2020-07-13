@@ -18,14 +18,16 @@ module cpu (
     inout[7:0] instruction_data,
     output[7:0] display_data,
     output[3:0] pc_data,
+    output [15:0] ctrl_state,
     output ovf, zf /* flags */
 );
     wire cpu_clk;
 
     /* control signals */
-    wire hlt, mi, ri, ro, ii, io, ai, ao, su, so, bi, oi, ce, co, j, fi;
+    wire hlt, mi, ri, ro, io, ii, ai, ao, so, su, bi, oi, ce, co, j, fi;
 
     assign cpu_clk = (clk & ~hlt);
+    assign ctrl_state = { hlt, mi, ri, ro, io, ii, ai, ao, so, su, bi, oi, ce, co, j, fi };
 
     /* A register */
     register8 A (
@@ -115,10 +117,11 @@ module cpu (
         .data(bus)
     );
 
+
     /* control logic */
     control ctrl (
         .clk(cpu_clk),
         .instruction(instruction_data[7:4]),
-        .ctrl_data({hlt, mi, ri, ro, ii, io, ai, ao, su, so, bi, oi, ce, co, j, fi})
+        .ctrl_data({hlt, mi, ri, ro, io, ii, ai, ao, so, su, bi, oi, ce, co, j, fi})
     );
 endmodule
