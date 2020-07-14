@@ -11,16 +11,19 @@ module eateremu_tb;
     wire[7:0] display_data;
     wire[3:0] pc_data;
     wire[15:0] ctrl_state;
+    reg clr;
     wire ovf, zf; /* flags */
 
     reg clk;
     initial begin
-        clk = 0;
+        #0 clk = 0; clr = 1;
+        #1 clk = 1; clr = 0;
         forever #1 clk = !clk;
     end
 
     cpu eateremu (
         .clk(clk),
+        .clr(clr),
         .bus(bus),
         .mem_address_data(mem_address_data),
         .mem_data(mem_data),
@@ -35,7 +38,8 @@ module eateremu_tb;
         .zf(zf)
     );
 
-    initial begin $monitor("%d: pc=%1x bus=%2x ctrl=%16b mem_addr=%1x", $time, pc_data, bus, ctrl_state, mem_address_data);
+    initial begin $monitor("%d: pc=%1x bus=%2x ctrl=%16b mem_addr=%1x inst=%2x",
+        $time, pc_data, bus, ctrl_state, mem_address_data, instruction_data);
         #32 $finish;
     end
 endmodule

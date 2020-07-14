@@ -1,17 +1,18 @@
 module program_counter (
     input clk,
+    input clr,
     input ce,
     input jmp,
     input[3:0] jmp_data,
     output reg[3:0] pc
 );
-    initial 
+    always @(posedge clr)
         pc <= 4'b0000;
 
     always @(posedge (clk & ce))
         pc++;
 
-    always @(posedge clk) begin
-        if (jmp) pc <= jmp_data;
+    always @(posedge (clk & jmp)) begin
+        pc <= jmp_data;
     end
 endmodule

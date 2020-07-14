@@ -9,6 +9,7 @@
 
 module cpu (
     input clk,
+    input clr,
     output[7:0] bus,
     output[3:0] mem_address_data,
     output[7:0] mem_data,
@@ -30,6 +31,7 @@ module cpu (
     /* A register */
     register8 A (
         .clk(cpu_clk),
+        .clr(clr),
         .write(ai),
         .data_i(a_data),
         .data_o(bus)
@@ -43,6 +45,7 @@ module cpu (
     /* B register */
     register8 B (
         .clk(cpu_clk),
+        .clr(clr),
         .write(bi),
         .data_i(b_data),
         .data_o(bus)
@@ -51,6 +54,7 @@ module cpu (
     /* instruction register */
     register8 instr (
         .clk(cpu_clk),
+        .clr(clr),
         .write(ii),
         .data_i(instruction_data),
         .data_o(bus)
@@ -64,6 +68,7 @@ module cpu (
     /* output register */
     register8 out (
         .clk(cpu_clk),
+        .clr(clr),
         .write(oi),
         .data_i(bus),
         .data_o(display_data)
@@ -87,6 +92,7 @@ module cpu (
     /* program counter */
     program_counter pc (
         .clk(cpu_clk),
+        .clr(clr),
         .ce(ce),
         .jmp(j),
         .jmp_data(bus[3:0]),
@@ -101,6 +107,7 @@ module cpu (
     /* memory address register */
     register4 mem_address (
         .clk(cpu_clk),
+        .clr(clr),
         .write(mi),
         .data_i(bus[3:0]),
         .data_o(mem_address_data)
