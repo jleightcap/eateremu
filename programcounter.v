@@ -3,16 +3,23 @@ module program_counter (
     input clr,
     input ce,
     input jmp,
-    input[3:0] jmp_data,
-    output reg[3:0] pc
+    input out,
+    inout[3:0] bus
 );
-    always @(posedge clr)
-        pc <= 4'b0000;
+    reg[3:0] count;
+    assign bus = out ? count : 4'bzzzz;
 
-    always @(posedge (clk & ce))
-        pc++;
+    initial count <= 4'b0000;
 
-    always @(posedge (clk & jmp)) begin
-        pc <= jmp_data;
+    always @(posedge clk, posedge clr) begin
+        if (clr) begin
+            count <= 4'b0000;
+        end
+        if (jmp) begin
+            count <= bus;
+        end
+        if (ce) begin
+            count++;
+        end
     end
 endmodule

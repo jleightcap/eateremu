@@ -1,15 +1,15 @@
-module register8 (
+module mem_register (
     input clk,
     input clr,
     input in,
     input out,
-    input[7:0] data_i,
-    output reg[7:0] mem,
-    output [7:0] data_o
+    input[3:0] data_i,
+    output reg[3:0] mem,
+    output[3:0] data_o
 );
     always @(posedge clk, posedge clr) begin
         if (clr) begin
-            mem <= 8'hzz;
+            mem <= 4'hz;
         end
         if (in) begin
             mem <= data_i;

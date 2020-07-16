@@ -22,13 +22,12 @@ module control (
 
     reg[2:0] count;
     
-    initial count <= 3'b111; /* pre-incremented in loop, initialized with overflow to 0 */
+    initial count <= 3'b000;
     initial ctrl_data <= 16'b0000000000000000;
 
     always @(posedge clk) begin
-        count++;
+        //$display(instruction);
         case (count)
-            /* hlt mi ri ro io ii ai ao so su bi oi ce co j fi */
             3'b000: ctrl_data = MI | CO;
             3'b001: ctrl_data = RO | II | CE;
             3'b010: begin case (instruction)
@@ -43,6 +42,7 @@ module control (
                 4'b1000: /* JZ  2 */ ctrl_data = 0;
                 4'b1110: /* OUT 2 */ ctrl_data = AO | OI;
                 4'b1111: /* HLT 2 */ ctrl_data = HLT;
+                default: ctrl_data = 0;
             endcase end
             3'b011: begin case (instruction)
                 4'b0000: /* NOP 3 */ ctrl_data = 0;
@@ -56,6 +56,7 @@ module control (
                 4'b1000: /* JZ  3 */ ctrl_data = 0;
                 4'b1110: /* OUT 3 */ ctrl_data = 0;
                 4'b1111: /* HLT 3 */ ctrl_data = 0;
+                default: ctrl_data = 0;
             endcase end
             3'b100: begin case (instruction)
                 4'b0000: /* NOP 4 */ ctrl_data = 0;
@@ -65,13 +66,15 @@ module control (
                 4'b0100: /* STA 4 */ ctrl_data = 0;
                 4'b0101: /* LDI 4 */ ctrl_data = 0;
                 4'b0110: /* JMP 4 */ ctrl_data = 0;
-                4'b0111: /* JC  4 */  ctrl_data = 0;
-                4'b1000: /* JZ  4 */  ctrl_data = 0;
+                4'b0111: /* JC  4 */ ctrl_data = 0;
+                4'b1000: /* JZ  4 */ ctrl_data = 0;
                 4'b1110: /* OUT 4 */ ctrl_data = 0;
                 4'b1111: /* HLT 4 */ ctrl_data = 0;
+                default: ctrl_data = 0;
             endcase end
             default:
                 ctrl_data = 0;
         endcase
+        count++;
     end
 endmodule

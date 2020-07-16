@@ -3,7 +3,8 @@ module ram (
     input[3:0] mem_address,
     input ri, /* write */
     input ro, /* read */
-    inout[7:0] data
+    input[7:0] data_i,
+    output [7:0] data_o
 );
     reg[7:0] memory[15:0];
     reg[8:0] mem_data;
@@ -28,8 +29,10 @@ module ram (
     end
 
     always @(posedge clk) begin
-        if (ri) memory[mem_address] <= data;
+        if (ri) begin
+            memory[mem_address] <= data_i;
+        end
     end
 
-    assign data = ro ? memory[mem_address] : 8'bzzzzzzzz;
+    assign data_o = ro ? memory[mem_address] : 8'hzz;
 endmodule
