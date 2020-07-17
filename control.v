@@ -25,13 +25,12 @@ module control (
     initial count <= 3'b000;
     initial ctrl_data <= 16'b0000000000000000;
 
-    integer instruction_num = 0;
+    `ifdef VERBOSE integer instruction_num = 0; `endif
 
     always @(posedge clk) begin
         case (count)
             3'b000: begin
-                $display(instruction_num);
-                instruction_num++;
+                `ifdef VERBOSE $display(instruction_num); instruction_num++; `endif
                 ctrl_data = MI | CO;
             end
             3'b001: begin

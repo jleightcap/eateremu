@@ -70,17 +70,15 @@ module cpu (
     );
 
     /* ALU */
-    /*
     Alu alu (
         .a(a_data),
         .b(b_data),
         .su(su),
-        .out(so)
-        .alu_out(alu_data),
+        .out(so),
+        .alu_out(bus),
         .ovf(ovf),
         .zf(zf)
     );
-    */
 
     /* program counter */
     program_counter pc (

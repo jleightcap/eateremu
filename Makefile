@@ -3,7 +3,7 @@ BIN  := eateremu_tb
 $(BIN):
 	iverilog $(BIN).v -o $(BIN)
 
-debug:
+verbose:
 	iverilog -DVERBOSE $(BIN).v -o $(BIN)
 
 test: $(BIN)
