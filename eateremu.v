@@ -48,6 +48,7 @@ module cpu (
     );
 
     /* instruction register */
+    wire[3:0] buffer; // place to dump high nibble...
     register8 instr (
         .clk(cpu_clk),
         .clr(clr),
@@ -55,7 +56,7 @@ module cpu (
         .out(io),
         .data_i(bus),
         .mem(instruction_data),
-        .data_o()
+        .data_o({buffer, bus[3:0]})
     );
 
     /* output register */

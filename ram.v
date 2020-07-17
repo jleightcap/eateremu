@@ -11,7 +11,7 @@ module ram (
 
     initial begin
         memory[0]  <= 8'b0101_0001;
-        memory[1]  <= 8'b0000_0000;
+        memory[1]  <= 8'b1110_0000;
         memory[2]  <= 8'b0000_0000;
         memory[3]  <= 8'b0000_0000;
         memory[4]  <= 8'b0000_0000;

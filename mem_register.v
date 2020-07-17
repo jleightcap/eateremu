@@ -16,5 +16,5 @@ module mem_register (
         end
     end
 
-    assign data_o = out ? mem : 8'hzz;
+    assign data_o = out ? mem : 4'hz;
 endmodule

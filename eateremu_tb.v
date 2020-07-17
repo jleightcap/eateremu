@@ -43,7 +43,7 @@ module eateremu_tb;
     end
 `else
     initial begin
-        #32 $finish;
+        #64 $finish;
     end
 `endif
 endmodule

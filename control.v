@@ -34,7 +34,6 @@ module control (
                 ctrl_data = RO | II | CE;
             end
             3'b010: begin
-                $display(instruction);
                 begin case (instruction)
                     4'b0000: /* NOP 2 */ ctrl_data = 0;
                     4'b0001: /* LDA 2 */ ctrl_data = IO | MI;
