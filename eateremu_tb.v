@@ -36,8 +36,14 @@ module eateremu_tb;
         .zf(zf)
     );
 
-    initial begin $monitor("bus=%2x ctrl=%16b mem_addr=%1x instr=%2x",
-        bus, ctrl_state, mem_address_data, instruction_data);
+`ifdef VERBOSE
+    initial begin $monitor("%d: bus=%2x ctrl=%16b mem_addr=%1x instr=%2x a=%2x b=%2x",
+        $time, bus, ctrl_state, mem_address_data, instruction_data, a_data, b_data);
         #32 $finish;
     end
+`else
+    initial begin
+        #32 $finish;
+    end
+`endif
 endmodule

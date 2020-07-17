@@ -10,7 +10,7 @@ module ram (
     reg[8:0] mem_data;
 
     initial begin
-        memory[0]  <= 8'b0000_0000;
+        memory[0]  <= 8'b0101_0001;
         memory[1]  <= 8'b0000_0000;
         memory[2]  <= 8'b0000_0000;
         memory[3]  <= 8'b0000_0000;

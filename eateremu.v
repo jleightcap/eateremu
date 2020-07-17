@@ -115,7 +115,7 @@ module cpu (
 
     /* control logic */
     control ctrl (
-        .clk(cpu_clk),
+        .clk(!cpu_clk),
         .instruction(instruction_data[7:4]),
         .ctrl_data({hlt, mi, ri, ro, io, ii, ai, ao, so, su, bi, oi, ce, co, j, fi})
     );

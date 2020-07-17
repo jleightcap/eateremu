@@ -26,24 +26,30 @@ module control (
     initial ctrl_data <= 16'b0000000000000000;
 
     always @(posedge clk) begin
-        //$display(instruction);
         case (count)
-            3'b000: ctrl_data = MI | CO;
-            3'b001: ctrl_data = RO | II | CE;
-            3'b010: begin case (instruction)
-                4'b0000: /* NOP 2 */ ctrl_data = 0;
-                4'b0001: /* LDA 2 */ ctrl_data = IO | MI;
-                4'b0010: /* ADD 2 */ ctrl_data = IO | MI;
-                4'b0011: /* SUB 2 */ ctrl_data = IO | MI;
-                4'b0100: /* STA 2 */ ctrl_data = IO | MI;
-                4'b0101: /* LDI 2 */ ctrl_data = IO | AI;
-                4'b0110: /* JMP 2 */ ctrl_data = IO | J;
-                4'b0111: /* JC  2 */ ctrl_data = 0;
-                4'b1000: /* JZ  2 */ ctrl_data = 0;
-                4'b1110: /* OUT 2 */ ctrl_data = AO | OI;
-                4'b1111: /* HLT 2 */ ctrl_data = HLT;
-                default: ctrl_data = 0;
-            endcase end
+            3'b000: begin
+                ctrl_data = MI | CO;
+            end
+            3'b001: begin
+                ctrl_data = RO | II | CE;
+            end
+            3'b010: begin
+                $display(instruction);
+                begin case (instruction)
+                    4'b0000: /* NOP 2 */ ctrl_data = 0;
+                    4'b0001: /* LDA 2 */ ctrl_data = IO | MI;
+                    4'b0010: /* ADD 2 */ ctrl_data = IO | MI;
+                    4'b0011: /* SUB 2 */ ctrl_data = IO | MI;
+                    4'b0100: /* STA 2 */ ctrl_data = IO | MI;
+                    4'b0101: /* LDI 2 */ ctrl_data = IO | AI;
+                    4'b0110: /* JMP 2 */ ctrl_data = IO | J;
+                    4'b0111: /* JC  2 */ ctrl_data = 0;
+                    4'b1000: /* JZ  2 */ ctrl_data = 0;
+                    4'b1110: /* OUT 2 */ ctrl_data = AO | OI;
+                    4'b1111: /* HLT 2 */ ctrl_data = HLT;
+                    default: ctrl_data = 0;
+                endcase end
+            end
             3'b011: begin case (instruction)
                 4'b0000: /* NOP 3 */ ctrl_data = 0;
                 4'b0001: /* LDA 3 */ ctrl_data = RO | AI;
