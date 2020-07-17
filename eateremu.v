@@ -60,15 +60,14 @@ module cpu (
     );
 
     /* output register */
-    /*
     register8 out (
         .clk(cpu_clk),
         .clr(clr),
-        .write(oi),
+        .in(oi),
+        .out(1'b1),
         .data_i(bus),
         .data_o(display_data)
     );
-    */
 
     /* ALU */
     /*

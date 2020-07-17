@@ -37,13 +37,14 @@ module eateremu_tb;
     );
 
 `ifdef VERBOSE
-    initial begin $monitor("%d: bus=%2x ctrl=%16b mem_addr=%1x instr=%2x a=%2x b=%2x",
-        $time, bus, ctrl_state, mem_address_data, instruction_data, a_data, b_data);
-        #32 $finish;
+    initial begin $monitor("%d: bus=%2x ctrl=%16b mem_addr=%1x instr=%2x a=%2x b=%2x o=%2x",
+        $time, bus, ctrl_state, mem_address_data, instruction_data, a_data, b_data, display_data
+    );
+        #1024 $finish;
     end
 `else
-    initial begin
-        #64 $finish;
+    initial begin $monitor("%2x", display_data);
+        #32 $finish;
     end
 `endif
 endmodule
