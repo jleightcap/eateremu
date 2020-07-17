@@ -11,8 +11,8 @@ module ram (
 
     initial begin
         memory[0]  <= 8'b0010_1111; // ADD 15
-        memory[1]  <= 8'b1111_0000; // HLT
-        memory[2]  <= 8'b0000_0000;
+        memory[1]  <= 8'b1110_0000; // OUT
+        memory[2]  <= 8'b1111_0000; // HLT
         memory[3]  <= 8'b0000_0000;
         memory[4]  <= 8'b0000_0000;
         memory[5]  <= 8'b0000_0000;
