@@ -20,8 +20,8 @@ module cpu (
     output ovf, zf /* flags */
 );
     /* control signals */
-    wire hlt, mi, ri, ro, io, ii, ai, ao, so, su, bi, oi, ce, co, j, fi;
-    assign ctrl_state = { hlt, mi, ri, ro, io, ii, ai, ao, so, su, bi, oi, ce, co, j, fi };
+    wire hlt, mi, ri, ro, io, ii, ai, ao, eo, su, bi, oi, ce, co, j, fi;
+    assign ctrl_state = { hlt, mi, ri, ro, io, ii, ai, ao, eo, su, bi, oi, ce, co, j, fi };
 
     wire cpu_clk = (clk & !hlt);
 
@@ -41,7 +41,7 @@ module cpu (
         .clk(cpu_clk),
         .clr(clr),
         .in(bi),
-        .out(),
+        .out(1'b0),
         .data_i(bus),
         .mem(b_data),
         .data_o(bus)
@@ -71,10 +71,11 @@ module cpu (
 
     /* ALU */
     Alu alu (
+        .clk(cpu_clk),
         .a(a_data),
         .b(b_data),
         .su(su),
-        .out(so),
+        .out(eo),
         .alu_out(bus),
         .ovf(ovf),
         .zf(zf)
@@ -115,6 +116,6 @@ module cpu (
     control ctrl (
         .clk(!cpu_clk),
         .instruction(instruction_data[7:4]),
-        .ctrl_data({hlt, mi, ri, ro, io, ii, ai, ao, so, su, bi, oi, ce, co, j, fi})
+        .ctrl_data({hlt, mi, ri, ro, io, ii, ai, ao, eo, su, bi, oi, ce, co, j, fi})
     );
 endmodule

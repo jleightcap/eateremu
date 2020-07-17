@@ -7,8 +7,6 @@ module program_counter (
     inout[3:0] bus
 );
     reg[3:0] count;
-    assign bus = out ? count : 4'bzzzz;
-
     initial count <= 4'b0000;
 
     always @(posedge clk, posedge clr) begin
@@ -22,4 +20,6 @@ module program_counter (
             count++;
         end
     end
+
+    assign bus = out ? count : 4'bzzzz;
 endmodule

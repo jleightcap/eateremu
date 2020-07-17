@@ -1,4 +1,5 @@
 module Alu (
+    input clk,
     input[7:0] a,
     input[7:0] b,
     input su,
@@ -20,7 +21,6 @@ module Alu (
     end
 
     assign result = su ? (a_buf - b_buf) : (a_buf + b_buf);
-
 
     assign alu_out = out ? result : 8'hzz;
     assign ovf = result[8];
