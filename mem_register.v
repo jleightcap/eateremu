@@ -9,7 +9,7 @@ module mem_register (
 );
     always @(posedge clk, posedge clr) begin
         if (clr) begin
-            mem <= 4'hz;
+            mem <= 4'h0;
         end
         if (in) begin
             mem <= data_i;

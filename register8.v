@@ -18,7 +18,7 @@ module register8 (
 
     always @(posedge clk, posedge clr) begin
         if (clr) begin
-            mem <= 8'hzz;
+            mem <= 8'h00;
         end
         if (in) begin
             mem <= data_buf;

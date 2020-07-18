@@ -1,5 +1,7 @@
 module control (
     input clk,
+    input ovf,
+    input zf,
     input[3:0] instruction,
     output reg[15:0] ctrl_data
 );
@@ -45,8 +47,16 @@ module control (
                     4'b0100: /* STA 2 */ ctrl_data = IO | MI;
                     4'b0101: /* LDI 2 */ ctrl_data = IO | AI;
                     4'b0110: /* JMP 2 */ ctrl_data = IO | J;
-                    4'b0111: /* JC  2 */ ctrl_data = 0;
-                    4'b1000: /* JZ  2 */ ctrl_data = 0;
+                    4'b0111: /* JC  2 */
+                        begin
+                            if (ovf) ctrl_data = IO | J;
+                            else ctrl_data = 0;
+                        end
+                    4'b1000: /* JZ  2 */
+                        begin
+                            if (zf) ctrl_data = IO | J;
+                            else ctrl_data = 0;
+                        end
                     4'b1110: /* OUT 2 */ ctrl_data = AO | OI;
                     4'b1111: /* HLT 2 */ ctrl_data = HLT;
                     default: ctrl_data = 0;
