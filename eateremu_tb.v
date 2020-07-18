@@ -40,11 +40,11 @@ module eateremu_tb;
     initial begin $monitor("%d: bus=%8b ctrl=%16b mem_addr=%1x a=%2x b=%2x o=%2x",
         $time, bus, ctrl_state, mem_address_data, a_data, b_data, display_data
     );
-        #100 $finish;
+        #1024 $finish;
     end
 `else
     initial begin $monitor("%2x", display_data);
-        #32 $finish;
+        #1024 $finish;
     end
 `endif
 endmodule
