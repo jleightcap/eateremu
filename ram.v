@@ -10,10 +10,10 @@ module ram (
     reg[8:0] mem_data;
 
     initial begin
-        memory[0]  <= 8'b0101_0001; // LDI 1
-        memory[1]  <= 8'b1000_1111; // JZ 15
-        memory[2]  <= 8'b1110_0000; // OUT
-        memory[3]  <= 8'b1111_0000; // HLT
+        memory[0]  <= 8'b0000_0000;
+        memory[1]  <= 8'b0000_0000;
+        memory[2]  <= 8'b0000_0000;
+        memory[3]  <= 8'b0000_0000;
         memory[4]  <= 8'b0000_0000;
         memory[5]  <= 8'b0000_0000;
         memory[6]  <= 8'b0000_0000;
@@ -25,7 +25,7 @@ module ram (
         memory[12] <= 8'b0000_0000;
         memory[13] <= 8'b0000_0000;
         memory[14] <= 8'b0000_0000;
-        memory[15] <= 8'b1111_0000; // HLT
+        memory[15] <= 8'b0000_0000;
     end
 
     always @(posedge clk) begin
