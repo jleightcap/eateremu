@@ -13,18 +13,18 @@ Run program with `./eatermu_tb`.
 ## Instruction Set
 | Instruction | Machine Code | Meaning |
 | ----------- | ------------ | ------- |
-| `NOP`       | `0000\_xxxx` | Do nothing |
-| `LDA imm8`  | `0001\_imm8` | `A = ram[imm8]` |
-| `ADD imm8`  | `0010\_imm8` | `A += ram[imm8]` |
-| `SUB imm8`  | `0011\_imm8` | `A -= ram[imm8]` |
-| `STA imm8`  | `0100\_imm8` | `ram[imm8] = A` |
-| `LDI imm8`  | `0101\_imm8` | `A = imm8` |
-| `JMP imm8`  | `0110\_imm8` | `PC = imm8` |
-| `JC imm8`   | `0111\_imm8` | if carry flag set `PC = imm8`, else `PC++` |
-| `JZ imm8`   | `1000\_imm8` | if zero flag set `PC = imm8`, else `PC++` |
+| `NOP`       | `0000_xxxx` | Do nothing |
+| `LDA imm8`  | `0001_imm8` | `A = ram[imm8]` |
+| `ADD imm8`  | `0010_imm8` | `A += ram[imm8]` |
+| `SUB imm8`  | `0011_imm8` | `A -= ram[imm8]` |
+| `STA imm8`  | `0100_imm8` | `ram[imm8] = A` |
+| `LDI imm8`  | `0101_imm8` | `A = imm8` |
+| `JMP imm8`  | `0110_imm8` | `PC = imm8` |
+| `JC imm8`   | `0111_imm8` | if carry flag set `PC = imm8`, else `PC++` |
+| `JZ imm8`   | `1000_imm8` | if zero flag set `PC = imm8`, else `PC++` |
 |             | ...          |
-| `OUT`       | `1110\_xxxx` | `OUT = A` |
-| `HLT`       | `1111\_xxxx` | Halt CPU |
+| `OUT`       | `1110_xxxx` | `OUT = A` |
+| `HLT`       | `1111_xxxx` | Halt CPU |
 
 The design of `control.v` allows for implementation of new instructions (in unused space
 between JZ and OUT), microcode modifications, and the addition of control signals.
