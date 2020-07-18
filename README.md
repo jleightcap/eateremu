@@ -6,9 +6,8 @@ The CPU architecture is an implementation of [Ben Eater's design](https://eater.
 ## Usage
 Write machine code to `ram.v`.
 
-To monitor output register status, run `make`; to monitor bus, all register, and control word status, run `make verbose`.
-
-Run program with `./eatermu_tb`.
+To monitor output register status, run `make`; to monitor bus, all registers, and control word status, run `make verbose`.
+Execute program in RAM with `./eatermu_tb`.
 
 ## Instruction Set
 | Instruction | Machine Code | Meaning |
@@ -27,7 +26,7 @@ Run program with `./eatermu_tb`.
 | `HLT`       | `1111_xxxx` | Halt CPU |
 
 The design of `control.v` allows for implementation of new instructions (in unused space
-between JZ and OUT), microcode modifications, and the addition of control signals.
+between JZ and OUT), microcode modifications, and the addition of new control signals.
 
 ## Example Program and Usage
 in `ram.v`,
@@ -54,17 +53,17 @@ end
 // ...
 ```
 
-This program stores calculates the data 0x1e, then executes that data as the instruction LDA 14.
+This program uses the ALU to calculate the data 0x1e, then executes that data as the instruction LDA 14.
 The contents of memory address 14 are stored to the output register then executed as the instruction HLT.
 
-Just viewing output register status, `make && ./eateremu`
+Just viewing output register status, `make && ./eateremu_tb`
 
 ```
 00
 ff
 ```
 
-Or a verbose output, `make verbose && ./eateremu`
+Or a verbose output, `make verbose && ./eateremu_tb`
 ```
                    0: bus=zzzzzzzz ctrl=0000000000000000 mem_addr=0 a=00 b=00 o=00
           0
